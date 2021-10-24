@@ -9,6 +9,7 @@
       <h1 v-else>Trevlig att träffas  {{ name }}</h1>
 
     <Form class="mt"/>
+    <Todos :todos="todos" class="mt"/>
       
     </div>
 
@@ -19,18 +20,26 @@
 
 import Form from './components/Form.vue'
 import Navbar from './components/Navbar.vue'
+import Todos from './components/Todos.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Form
+    Form,
+    Todos
   },
 
   data() {
     return {
       name: 'Pavel',
       active: true,
+      todos: [
+        {title: 'Todo1'},
+        {title: 'Todo2'},
+        {title: 'Todo3'}
+
+      ]
     }
   }
 
