@@ -1,6 +1,7 @@
 <template>
   <div class="border shadow bg-white d-flex justify-content-between align-items-center p-1 mb-2 rounded">
-      <p class="m-0" :class="{'done': todo.completed}" @click="todo.completed = !todo.completed">  {{ todo.title }}</p>
+      <!-- <p class="m-0" :class="{'done': todo.completed}" @click="todo.completed = !todo.completed">  {{ todo.title }}</p> -->
+      <p class="m-0" :class="{'done': todo.completed}" @click="$emit('toogle-complete', todo)">  {{ todo.title }}</p>
       <button class="btn btn-danger btn-sm" @click="deleteTodo"><i class="fas fa-trash"></i></button>
   </div>
 </template>
