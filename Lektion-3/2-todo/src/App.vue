@@ -6,21 +6,24 @@
 
     <div class="container py-5">
       
-    <Todos :value="sort"  :todos="todos" @delete-todo="deleteTodo"  @todo-error="showModal" />
+    <Todos :value="sort"  :todos="todos" @delete-todo="deleteTodo"  @todo-error="openModal" />
 
     </div>
 
-    <ErrorModal v-if="showError"/>
+    <ErrorModal v-if="showModal" @close-modal="showModal = false"/>
 
   </div>
 </template>
 
 <script>
 
+
+import axios from 'axios'
 import Header from './components/Header.vue'
 import AddTodo from './components/AddTodo.vue'
 import Todos from './components/Todos/Todos.vue'
 import ErrorModal from './components/Todos/ErrorModal.vue'
+
 
 import {v4 as uuidv4} from 'uuid'
 
@@ -36,20 +39,26 @@ export default {
 
   data()  {
     return {
-      todos: [
-        { _id: '1', title: 'Todo Idet One', completed: false},
-        { _id: '2', title: 'Todo Idet Two', completed: true},
-        { _id: '3', title: 'Todo Idet Three', completed: false},
-        { _id: '4', title: 'Todo Idet Four', completed: false},
-        { _id: '5', title: 'Todo Idet Five', completed: false},
-      ],
+      todos: [],
 
       sort: '',
-      showError: false
+      showModal: false,
+      apiUrl: 'http://localhost:9999/api/todos'
     }
   },
 
   methods: {
+
+
+    async fetchTodos()  {
+      const res = await axios.get(this.apiUrl)
+      console.log(res.data)
+      this.todos = res.data;
+    },
+
+
+
+
     add(title)  {
 
       let todo = {
@@ -83,11 +92,16 @@ export default {
       }
     },
 
-    showModal()  {
-      this.showError = true
+    openModal()  {
+      this.showModal = true
 
     }
 
+  },
+
+  created() {
+    console.log('created')
+    this.fetchTodos();
   }
 
 }

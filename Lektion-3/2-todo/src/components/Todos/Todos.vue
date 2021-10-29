@@ -1,5 +1,11 @@
 <template>
   <div v-if="todos.length">
+
+<transition-group name="fade-slide">
+
+
+
+
       <div v-for="todo in todos" :key="todo._id">  
 
           <Todo  v-if="value === '' " :todo="todo"  @todo-error="$emit('todo-error')"  @delete-todo="$emit('delete-todo', todo._id)" />
@@ -7,6 +13,7 @@
             
             </div>
    
+</transition-group>
 
 
   </div>
@@ -29,5 +36,24 @@ export default {
 </script>
 
 <style>
+
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-slide-enter {
+  opacity: 0;
+  transform: translateX(-50px);
+
+}
+  .fade-slide-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+/* .fade-slide-enter-to {
+  opacity: 1;
+  } */
+
 
 </style>

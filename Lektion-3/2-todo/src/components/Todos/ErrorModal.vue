@@ -1,5 +1,5 @@
 <template>
-  <div class="overlay">
+  <div class="overlay" @click.self="closeModal">
 
 <div class="card">
   <div class="card-header">
@@ -8,7 +8,7 @@
   </div>
   <div class="card-body">
     <p class="card-text">You need to complete Todo first</p>
-    <a href="#" class="btn btn-primary">OK</a>
+    <button class="btn btn-primary" @click="closeModal">OK</button>
   </div>
 </div>
 
@@ -17,6 +17,11 @@
 
 <script>
 export default {
+  methods: {
+    closeModal()  {
+      this.$emit('close-modal')
+    }
+  }
 
 }
 </script>
