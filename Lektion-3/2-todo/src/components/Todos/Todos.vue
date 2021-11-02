@@ -8,8 +8,8 @@
 
       <div v-for="todo in todos" :key="todo._id">  
 
-          <Todo  v-if="value === '' " :todo="todo"  @todo-error="$emit('todo-error')"  @delete-todo="$emit('delete-todo', todo._id)" />
-          <Todo  v-else-if="todo.completed === value" :todo="todo" @todo-error="$emit('todo-error')" @delete-todo="$emit('delete-todo', todo._id)" />
+          <Todo  v-if="value === '' " :todo="todo" @toogle-complete="$emit('toogle-complete', todo)"  @todo-error="$emit('todo-error')"  @delete-todo="$emit('delete-todo', todo._id)" />
+          <Todo  v-else-if="todo.completed === value" @toogle-complete="$emit('toogle-complete', todo)" :todo="todo" @todo-error="$emit('todo-error')" @delete-todo="$emit('delete-todo', todo._id)" />
             
             </div>
    

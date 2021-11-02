@@ -6,7 +6,7 @@
 
     <div class="container py-5">
       
-    <Todos :value="sort"  :todos="todos" @delete-todo="deleteTodo"  @todo-error="openModal" />
+    <Todos :value="sort"  :todos="todos" @toogle-complete="toogleComplete" @delete-todo="deleteTodo"  @todo-error="openModal" />
 
     </div>
 
@@ -25,7 +25,7 @@ import Todos from './components/Todos/Todos.vue'
 import ErrorModal from './components/Todos/ErrorModal.vue'
 
 
-import {v4 as uuidv4} from 'uuid'
+// import {v4 as uuidv4} from 'uuid'
 
 export default {
 
@@ -43,7 +43,9 @@ export default {
 
       sort: '',
       showModal: false,
-      apiUrl: 'http://localhost:9999/api/todos'
+      apiUrl: 'http://localhost:9999/api/todos',
+      apiUrl2: 'http://localhost:9999/api/todos/new',
+      apiUrl3: 'http://localhost:9999/api/todos'
     }
   },
 
@@ -59,22 +61,58 @@ export default {
 
 
 
-    add(title)  {
+    async add(title)  {
 
-      let todo = {
-        _id: uuidv4(),
-        title,
-        completed: false
+      // let todo = {
+      //   _id: uuidv4(),
+      //   title,
+      //   completed: false
+      // }
+
+    try {
+      
+      const res = await axios.post(this.apiUrl2, {title})
+    console.log(res)
+
+    if(res.status === 201) {
+      // this.todos.push(todo)
+      this.fetchTodos()
+    }
+      }
+      catch(err) {
+        console.log(err)
+      }
+    },
+
+   deleteTodo(id)   {
+
+     
+
+    axios.delete(`${this.apiUrl3}/${id}`)
+    .then(res => {
+      console.log(res)
+      if(res.status === 200)  {
+        this.todos = this.todos.filter(todo => todo._id !== id)
+      }
+    })
+    .catch(err => console.log(err))
+
+
+    },
+
+    async toogleComplete(todo)  {
+
+      
+      const res = await axios.patch(`${this.apiUrl3}/${todo._id}`, {
+        completed: !todo.completed
+      })
+
+      if(res.status === 200) {
+        todo.completed = !todo.completed
       }
 
-      this.todos.push(todo)
     },
 
-    deleteTodo(id)   {
-
-      this.todos = this.todos.filter(todo => todo._id !== id)
-
-    },
 
     sortTodos(val)  {
 
