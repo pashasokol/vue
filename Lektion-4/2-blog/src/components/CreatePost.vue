@@ -105,7 +105,7 @@
         <!-- Card image -->
         <div class="bg-info text-center p-2">
           <!-- Title -->
-          <h2 class="card-header-title mb-3"> {{ blog.title  }}</h2>
+          <h2 class="card-header-title mb-3 out-title"> {{ blog.title.toUpperCase()  }}</h2>
          
         </div>
 
@@ -139,6 +139,7 @@ export default {
         content: "",
         categories: [],
         author: "",
+        id: ''
       },
 
       authors: ["Pavel", "Sanela", "Stepa"],
@@ -155,7 +156,8 @@ export default {
         this.blog.author !== ""
       ) {
         // Emit new post
-
+        this.blog.id = Date.now()
+        this.$emit('new-post', this.blog)
         // reset form
 
         this.blog = {
@@ -163,6 +165,7 @@ export default {
           content: "",
           categories: [],
           author: "",
+          id: ''
         };
 
         // validate
@@ -194,4 +197,16 @@ export default {
 </script>
 
 <style>
+
+  .out-title {
+    min-height: 40px;
+
+  }
+
+  .list-group li {
+    list-style: none;
+    padding: 0 1rem 0.5rem;
+  }
+
+
 </style>
