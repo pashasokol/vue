@@ -6,7 +6,7 @@
   <div class="container mt-5">
     <keep-alive>
 
-    <component :is="component" :posts="posts" @new-post="posts.push($event)" />
+    <component :is="component" :posts="posts" @change-component="changeComponent" @new-post="newPost" />
 
     </keep-alive>
 
@@ -38,7 +38,14 @@ export default {
   methods: {
     changeComponent(comp)  {
       this.component = comp;
-    }
+    },
+  
+    newPost(blogPost)  {
+
+    this.posts.push(blogPost)
+    this.component = 'ViewPosts'
+
+  }
   }
 
 }
