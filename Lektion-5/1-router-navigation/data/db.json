@@ -1,0 +1,44 @@
+{
+    "meetingRooms": [
+        {
+            "id": 1,
+            "name": "Ängsö",
+            "capacity": 60,
+            "equipment": [
+             "Projektor",
+             "Whiteboard"   
+            ]
+        },
+        {
+            "id": 2,
+            "name": "KTH-2",
+            "capacity": 125,
+            "equipment": [
+             "Projektor",
+             "Whiteboard",
+             "Servrar"   
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Lindö",
+            "capacity": 20,
+            "equipment": [
+             "Projektor",
+             "Whiteboard",
+             "Servrar"   
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Dalarö",
+            "capacity": 2,
+            "equipment": [
+             "Whiteboard"
+             
+            ]
+        }
+
+    ]
+
+}
