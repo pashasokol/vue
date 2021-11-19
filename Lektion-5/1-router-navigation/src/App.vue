@@ -2,9 +2,13 @@
   <div>
   
     <Navbar />
+
+    <div class="container my-5">
+      
     
     <router-view/>
 
+    </div>
     <Footer />
 
   </div>
