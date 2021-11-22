@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Booking from '../views/booking/Booking.vue'
 import Details from '../views/booking/Details.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -18,9 +19,15 @@ const routes = [
     component: Booking
   },
   {
+    path: '/search',
+    name: 'Search',
+    component: Search
+  },
+  {
     path: '/booking/details/:id',
     name: 'Details',
-    component: Details
+    component: Details,
+    props: true
   },
   {
     path: '/about',

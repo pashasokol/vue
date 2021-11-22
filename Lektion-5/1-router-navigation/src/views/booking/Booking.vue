@@ -27,7 +27,6 @@ export default {
             if(res.status === 200) {
                 this.meetingRooms = res.data
             }
-            console.log(res)
         }
 
     },
