@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import Grid from '../components/Products/Grid.vue'
 import List from '../components/Products/List.vue'
 export default {
@@ -32,15 +33,11 @@ export default {
         Grid,
         List
     },
-    data() {
-        return {
-            comp: 'List'
-        }
+    computed: {
+        ...mapGetters(['comp'])
     },
     methods: {
-        changeComp(val) {
-            this.comp = val;
-        }
+        ...mapActions(['changeComp'])
     }
 
 }

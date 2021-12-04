@@ -60,6 +60,9 @@ export default new Vuex.Store({
         name: "product 11",
         price: 599 },
     ],
+
+    comp: 'grid',
+    product: null
   },
   getters: {
     taxedProducts: state => {
@@ -75,7 +78,13 @@ export default new Vuex.Store({
 
         return taxedProducts
     
-    }
+    },
+
+
+    products: state => state.products,
+    comp: state => state.comp,
+    product: state => state.product
+
 
   },
   mutations: {
@@ -94,6 +103,19 @@ export default new Vuex.Store({
           product.price -= amount
       })
      
+  },
+
+  CHANGE_COMP: (state, payload)  => {
+    state.comp = payload
+  },
+
+  SET_PRODUCT: (state,id)  => {
+    let prod = state.products.find(p => p.id === id)
+    prod = {
+      ...prod,
+      taxPrice: Math.round(prod.price + prod.price * 0.2)
+    }
+    return prod
   }
 },
 
@@ -114,7 +136,15 @@ export default new Vuex.Store({
 
     addToPrice:  ({commit}, amount)  => {
       commit('ADD', amount)
-    }
+    },
+
+    changeComp: ( {commit}, component  ) => {
+      commit('CHANGE_COMP', component)
+    },
+
+    getProduct: ( {commit}, id )  => {
+      commit('SET_PRODUCT', id)
+    } 
  
 
   },
